@@ -30,8 +30,8 @@ def load_embeddings():
     return HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
 @st.cache_resource
-def load_db(emb):
-    return Chroma(persist_directory=CHROMA_PATH, embedding_function=emb)
+def load_db(_embeddings):
+    return Chroma(persist_directory=CHROMA_PATH, embedding_function=embeddings)
 
 @st.cache_resource
 def load_llm(model_name, temperature):
