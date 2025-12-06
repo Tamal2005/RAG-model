@@ -30,8 +30,8 @@ def load_embeddings():
     return HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 
 @st.cache_resource
-def load_db(_embeddings):
-    return Chroma(persist_directory=CHROMA_PATH, embedding_function=embeddings)
+def load_db(emb):
+    return Chroma(persist_directory=CHROMA_PATH, embedding_function=emb)
 
 @st.cache_resource
 def load_llm(model_name, temperature):
@@ -115,7 +115,7 @@ with st.sidebar:
 # ------------------------------------------------------------
 embeddings = load_embeddings()
 db = load_db(embeddings)
-llm = load_llm('TinyLlama/TinyLlama-1.1B-Chat-v1.0', temperature)
+llm = load_llm('Qwen/Qwen2.5-0.5B-Instruct', temperature)
 
 retriever = db.as_retriever(search_kwargs={"k": top_k})
 qa_chain = build_qa(llm, retriever)
