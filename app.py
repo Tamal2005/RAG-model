@@ -27,7 +27,7 @@ CHROMA_PATH = "chroma_db"
 
 @st.cache_resource
 def load_embeddings():
-    return HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+    return HuggingFaceEmbeddings(model_name="sentence-transformers/paraphrase-MiniLM-L3-v2")
 
 @st.cache_resource
 def load_db(_embeddings):
